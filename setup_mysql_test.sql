@@ -1,15 +1,10 @@
 -- Script to prepare MySQL server for AirBnB_v2
--- Creates:
---	* new user 'hbnb_dev' in localhost
---	* new database 'hbnb_dev_db'
--- Assigns: hbnb_dev with:
--- 	* All privileges on the database 'hbnb_dev_db'
---	* SELECT privilege on the database 'performance_schema'
--- Query 1
+
+-- Creeate database 'hbnb_dev_db'
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
--- Query 2
+-- Create user 'hbnb_dev'
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
--- Query 3
+-- Grant all privileges to 'hbnb_dev' on 'hbnb_dev_db' database
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
--- Query 4
+-- Grant select privileges to 'hbnb_deve' on 'performance schema' database
 GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
