@@ -23,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
                'State': State, 'City': City, 'Amenity': Amenity,
                'Review': Review
               }
-    dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+    dot_cmds = ['all', 'count', 'show', 'destroy', 'update', "create"]
     types = {
              'number_rooms': int, 'number_bathrooms': int,
              'max_guest': int, 'price_by_night': int,
@@ -44,11 +44,11 @@ class HBNBCommand(cmd.Cmd):
         _cmd = _cls = _id = _args = ''  # initialize line elements
 
         # scan for general formating - i.e '.', '(', ')'
-        if not ('.' in line and '(' in line and ')' in line):
+        if all(i not in line for i in ['.', '(', ')']):
             return line
 
         try:  # parse line left to right
-            pline = line[:]  # parsed line
+            pline = line[:]  # copy of user input
 
             # isolate <class name>
             _cls = pline[:pline.find('.')]
@@ -79,8 +79,12 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         _args = pline.replace(',', '')
                         # _args = _args.replace('\"', '')
-            line = ' '.join([_cmd, _cls, _id, _args])
-
+                line = ' '.join([_cmd, _cls, _id, _args])
+            else:
+                # return cmd and class if there are no arguments
+                # case of create and all
+                if _cmd in ["create", "all"]:
+                   line = ' '.join([_cmd, _cls])
         except Exception as mess:
             pass
         finally:
