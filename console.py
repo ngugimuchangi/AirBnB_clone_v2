@@ -68,6 +68,7 @@ class HBNBCommand(cmd.Cmd):
                 _id = pline[0].replace('\"', '')
                 # possible bug here:
                 # empty quotes register as empty _id when replaced
+                # might have fixed the bug here
 
                 # if arguments exist beyond _id
                 pline = pline[2].strip()  # pline is now str
@@ -122,10 +123,20 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        # split arguments into class and attributes
+        args = args.split()
+        _cls = args[0]
+        if _cls not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[args]()
+        # get attributes if they exist after the class name
+        if len(args) > 1:
+            attrs = args[1:]
+            for attr in attrs:
+                if "=" in attr:
+                    name, value = attr.split()
+                    setattr(new_instance, name, value)
         storage.save()
         print(new_instance.id)
         storage.save()
