@@ -84,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
                 # return cmd and class if there are no arguments
                 # case of create and all
                 if _cmd in ["create", "all"]:
-                   line = ' '.join([_cmd, _cls])
+                    line = ' '.join([_cmd, _cls])
         except Exception as mess:
             pass
         finally:
