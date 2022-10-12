@@ -14,12 +14,15 @@ class FileStorage:
         if cls is not None:
             # create a new dictionary of objects fo passed cls
             # key must be the same as in __objects
-            obj_dict = {key: FileStorage.__objects[key] for key in FileStorage.__objects.keys() if (FileStorage.__object[key].__class__ == cls)}
+            obj_dict = {key: FileStorage.__objects[key] for key
+                        in FileStorage.__objects.keys() if
+                        FileStorage.__objects[key].__class__ == cls}
             return obj_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
-        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
+        FileStorage.__objects.update({obj.to_dict()['__class__'] +
+                                      '.' + obj.id: obj})
 
     def save(self):
         """Saves storage dictionary to file"""
@@ -58,6 +61,6 @@ class FileStorage:
         """ Delete object inside __objects dictionary"""
         if obj is not None:
             # check if object is in dictionary
-            key = ".".join([obj.dict()['__class__'], obj.id])
-            if key in FileStorage.__objects.keys(): 
+            key = ".".join([obj.to_dict()['__class__'], obj.id])
+            if key in FileStorage.__objects.keys():
                 del FileStorage.__objects[key]
