@@ -150,9 +150,8 @@ class HBNBCommand(cmd.Cmd):
                             pass
                     # add attributes and values
                     setattr(new_instance, name, value)
-        storage.save()
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -234,11 +233,14 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            # list of object of specific class
+            obj_list = storage.all(HBNBCommand.classes[args])
+            for k, v in obj_list.items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            obj_list = storage.all()  # list of all objects
+            for k, v in obj_list.items():
                 print_list.append(str(v))
 
         print(print_list)
