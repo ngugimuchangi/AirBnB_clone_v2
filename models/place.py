@@ -8,20 +8,21 @@ from os import getenv
 from sqlalchemy import Column, ForeignKey, Float, Integer, Table, String
 from sqlalchemy.orm import relationship
 
+# association table definition
+associtation_table = Table('place_amenity',  Base.metadata,
+                           Column('place_id', String(60),
+                                  ForeignKey('places.id'),
+                                  primary_key=True,
+                                  nullable=False),
+                           Column('amenity_id', String(60),
+                                  ForeignKey('amenities.id'),
+                                  primary_key=True,
+                                  nullable=False))
+
 
 class Place(BaseModel, Base):
     """ City table declarative class """
 
-    # association table definition
-    place_amenity = Table('place_amenity',  Base.metadata,
-                          Column('place_id', String(60),
-                                 ForeignKey('paces.id'),
-                                 primary_key=True,
-                                 nullable=False),
-                          Column('amenity_id', String(60),
-                                 ForeignKey('amenities.id'),
-                                 primary_key=True,
-                                 nullable=False))
     # main table definition
     __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -35,8 +36,8 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=False, default=0)
     longitude = Column(Float, nullable=False, default=0)
     reviews = relationship('Review', backref='place',
-                           cascade='all, delete, update')
-    amenities = relationship('Amenity', secondary=place_amenity,
+                           cascade='all, delete')
+    amenities = relationship('Amenity', secondary='place_amenity',
                              viewonly=False)
     amenity_ids = []
 
@@ -51,7 +52,7 @@ class Place(BaseModel, Base):
                 if all(['place_id' in review.__dict__.keys(),
                         review.place_id == self.id]):
                     reviews.append(review)
-            return review
+            return reviews
 
         @property
         def amenities(self):

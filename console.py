@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from os import getenv
 
 
 class HBNBCommand(cmd.Cmd):
@@ -100,7 +101,8 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
         if getenv('HBNB_TYPE_STORAGE') == 'db':
-            storage.__session.close()
+            # storage.__session.close()
+            pass
 
         exit()
 

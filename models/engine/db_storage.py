@@ -1,13 +1,7 @@
 #!/usr/bin/python3
 """ Database storage engine
 """
-from models.amenity import Amenity
 from models.base_model import Base
-from models.city import City
-from models.place import Place
-from models.state import State
-from models.review import Review
-from models.user import User
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -36,8 +30,14 @@ class DBStorage():
 
     def all(self, cls=None):
         """ query current database session for all objects """
+        from models.amenity import Amenity
+        from models.city import City
+        from models.state import State
+        from models.place import Place
+        from models.review import Review
+        from models.user import User
         objs = {}
-        class_list = [State, City]
+        class_list = [Amenity, State, City, Place, Review, User]
         if cls is not None:
             # query for all records in particular table
             # Add them to dictionary 'objs'
