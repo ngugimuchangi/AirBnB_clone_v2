@@ -40,6 +40,12 @@ class Place(BaseModel, Base):
     amenity_ids = []
 
     if getenv('HBNB_TYPE_STORAGE') != 'db':
+        def __int__(self):
+            """ contructor """
+            self.reviews = []
+            self.amenities = []
+            super().__init__()
+
         @property
         def reviews(self):
             from models.review import Review
