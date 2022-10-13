@@ -44,36 +44,27 @@ class Place(BaseModel, Base):
         def reviews(self):
             from models.review import Review
             """ Get a list of reviews instance """
-            # check if place has reviews attribute
-            if 'reviews' not in self.__dict__.keys():
-                self.reviews = []
+            reviews = []
             all_reviews = storage.all(Review)
             for review in all_reviews.values():
-                if all(['place_id' in review.__dict__.keys(),
-                        review.place_id == self.id]):
-                    self.reviews.append(review)
-            return self.reviews
+                if review.place_id == self.id:
+                    reviews.append(review)
+            return reviews
 
         @property
         def amenities(self):
             from models.amenity import Amenity
             """ Gets a list of amenitiy instances of a place """
-            # check if place has amenities attribute
-            if 'amenities' not in self.__dict__.keys():
-                self.amenities = []
+            amenities = []
             all_amenities = storage.all(Amenity)
             for amenity in all_amenities.values():
-                if 'amenity.ids' in amenity.__dict__ and \
-                        amentitamenity.id in self.amenity_ids:
-                    self.amenities.append(amenity)
-            return self.amenities
+                if amenity.id in self.amenity_ids:
+                    amenities.append(amenity)
+            return amenities
 
         @amenities.setter
         def amenities(self, amenity):
-            """ Adds amenities ids to a place """
             from models.amenity import Amenity
-            # check if place has amenities attribute
-            if 'amenities' not in self.__dict__.keys():
-                self.amenities = []
+            """ Adds amenities ids to a place """
             if amenity.__class__ == Amenity:
                 self.amenity_ids.append(amenity.id)
