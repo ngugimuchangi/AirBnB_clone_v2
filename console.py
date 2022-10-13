@@ -99,6 +99,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
+        if getenv('HBNB_TYPE_STORAGE') == 'db':
+            storage.__session.close()
+
         exit()
 
     def help_quit(self):
