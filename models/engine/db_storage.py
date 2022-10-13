@@ -13,7 +13,7 @@ class DBStorage():
     __session = None
 
     def __init__(self):
-        """ constructor function to create engine """
+        """ Constructor method to create engine for database storage"""
         # environment variables
         env = getenv('HBNB_ENV')
         user = getenv('HBNB_MYSQL_USER')
@@ -24,12 +24,12 @@ class DBStorage():
             self.__engine = create_engine("{}://{}:{}@{}/{}".format(
                             "mysql+mysqldb", user, pwd, host, db),
                             pool_pre_ping=True)
-            if env == 'dev':
+            if env == 'test':
                 # delete all tables
                 Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        """ query current database session for all objects """
+        """ Queries current database session for all objects """
         from models.amenity import Amenity
         from models.city import City
         from models.state import State
@@ -37,7 +37,7 @@ class DBStorage():
         from models.review import Review
         from models.user import User
         objs = {}
-        class_list = [Amenity, State, City, Place, Review, User]
+        class_list = [User, State, City, Place, Amenity, Review]
         if cls is not None:
             # query for all records in particular table
             # Add them to dictionary 'objs'
@@ -54,27 +54,36 @@ class DBStorage():
         return objs
 
     def new(self, obj):
-        """ ddds item to current database session """
+        """ Adds item to current database session """
         if obj is not None:
             self.__session.add(obj)
 
     def save(self):
-        """ commits all changes of the current database session """
+        """ Commits all changes of the current database session """
         self.__session.commit()
 
     def delete(self, obj=None):
-        """ delete objects from current database """
+        """ Delete objects from current database """
         if obj is not None:
             # check if object exists in table before deleting it
             obj_query = self.__session.query(obj.__class__).filter_by(
                     id=obj.id).one_or_none()
             if obj_query is not None:
                 self._session.delete(obj_query)
+                self.save()
 
     def reload(self):
-        """ create all tables in the database """
+        """ Create all tables in the database """
+        from models.amenity import Amenity
+        from models.city import City
+        from models.state import State
+        from models.place import Place
+        from models.review import Review
+        from models.user import User
+
         # create all tables
         Base.metadata.create_all(self.__engine)
+
         # create session
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)

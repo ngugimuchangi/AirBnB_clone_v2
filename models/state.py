@@ -20,10 +20,10 @@ class State(BaseModel, Base):
             """ get the list of City instances whose
                 state_id equals current id
             """
-            cities = []
-            all_citieses = storage.all(City)
+            self.cities = []
+            all_cities = storage.all(City)
             for city in all_cities.values():
                 if all(['state_id' in city.__dict__.keys(),
                         city.state_id == self.id]):
-                    cities.append(city)
-            return cities
+                    self.cities.append(city)
+            return self.cities
