@@ -40,17 +40,13 @@ class Place(BaseModel, Base):
     amenity_ids = []
 
     if getenv('HBNB_TYPE_STORAGE') != 'db':
-        def __int__(self):
-            """ contructor """
-            self.reviews = []
-            self.amenities = []
-            super().__init__()
-
         @property
         def reviews(self):
             from models.review import Review
-            """ Get a list of revie instance """
-            self.reviews = []
+            """ Get a list of reviews instance """
+            # check if place has reviews attribute
+            if 'reviews' not in self.__dict__.keys():
+                self.reviews = []
             all_reviews = storage.all(Review)
             for review in all_reviews.values():
                 if all(['place_id' in review.__dict__.keys(),
@@ -62,7 +58,9 @@ class Place(BaseModel, Base):
         def amenities(self):
             from models.amenity import Amenity
             """ Gets a list of amenitiy instances of a place """
-            self.amenities = []
+            # check if place has amenities attribute
+            if 'amenities' not in self.__dict__.keys():
+                self.amenities = []
             all_amenities = storage.all(Amenity)
             for amenity in all_amenities.values():
                 if 'amenity.ids' in amenity.__dict__ and \
@@ -72,7 +70,10 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, amenity):
+            """ Adds amenities ids to a place """
             from models.amenity import Amenity
-            """ adds amenities ids to a place """
+            # check if place has amenities attribute
+            if 'amenities' not in self.__dict__.keys():
+                self.amenities = []
             if amenity.__class__ == Amenity:
                 self.amenity_ids.append(amenity.id)
