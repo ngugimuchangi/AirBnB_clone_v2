@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Database storage engine
+""" Database storage engine module
 """
 from models.base_model import Base
 from sqlalchemy import create_engine
@@ -14,7 +14,7 @@ from models.user import User
 
 
 class DBStorage():
-    """ Database engine class"""
+    """ Database engine class for interacting with the msql database"""
     __engine = None
     __session = None
 
