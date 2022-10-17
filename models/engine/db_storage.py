@@ -2,9 +2,15 @@
 """ Database storage engine
 """
 from models.base_model import Base
-from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+from os import getenv
+from models.amenity import Amenity
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.user import User
 
 
 class DBStorage():
@@ -30,12 +36,6 @@ class DBStorage():
 
     def all(self, cls=None):
         """ Queries current database session for all objects """
-        from models.amenity import Amenity
-        from models.city import City
-        from models.state import State
-        from models.place import Place
-        from models.review import Review
-        from models.user import User
         objs = {}
         class_list = [User, State, City, Place, Amenity, Review]
         if cls is not None:
@@ -69,18 +69,11 @@ class DBStorage():
             obj_query = self.__session.query(obj.__class__).filter_by(
                     id=obj.id).one_or_none()
             if obj_query is not None:
-                self._session.delete(obj_query)
+                self.__session.delete(obj_query)
                 self.save()
 
     def reload(self):
         """ Create all tables in the database """
-        from models.amenity import Amenity
-        from models.city import City
-        from models.state import State
-        from models.place import Place
-        from models.review import Review
-        from models.user import User
-
         # create all tables
         Base.metadata.create_all(self.__engine)
 

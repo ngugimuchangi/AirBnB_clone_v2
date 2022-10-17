@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
-from models import storage
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import Column, ForeignKey, Float, Integer, Table, String
@@ -42,6 +41,7 @@ class Place(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
         def reviews(self):
+            from models import storage
             from models.review import Review
             """ Get a list of reviews instance """
             reviews = []
@@ -53,6 +53,7 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
+            from models import storage
             from models.amenity import Amenity
             """ Gets a list of amenitiy instances of a place """
             amenities = []

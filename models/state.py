@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models import storage
 from models.city import City
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
@@ -20,6 +19,7 @@ class State(BaseModel, Base):
             """ get the list of City instances whose
                 state_id equals current id
             """
+            from models import storage
             self.cities = []
             all_cities = storage.all(City)
             for city in all_cities.values():

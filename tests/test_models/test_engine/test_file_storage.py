@@ -2,12 +2,16 @@
 """ Module for testing file storage"""
 import unittest
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 import os
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                 "Tests for file storage")
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
+    storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     def setUp(self):
         """ Set up test environment """
@@ -57,7 +61,9 @@ class test_fileStorage(unittest.TestCase):
     def test_save(self):
         """ FileStorage save method """
         new = BaseModel()
-        storage.save()
+        self.assertFalse(new in storage._FileStorage__objects.values())
+        new.save()
+        self.assertTrue(new in storage._FileStorage__objects.values())
         self.assertTrue(os.path.exists('file.json'))
 
     def test_reload(self):
@@ -106,3 +112,11 @@ class test_fileStorage(unittest.TestCase):
         """ FileStorage object storage created """
         from models.engine.file_storage import FileStorage
         self.assertEqual(type(storage), FileStorage)
+
+    def test_delete(self):
+        """ Test deletion of object from list of objects """
+        user = User(name="Tester")
+        user.save()
+        self.assertTrue(user in storage._FileStorage__objects.values())
+        storage.delete(user)
+        self.assertTrue(user not in storage._FileStorage__objects.values())

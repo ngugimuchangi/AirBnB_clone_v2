@@ -2,8 +2,11 @@
 """ """
 from tests.test_models.test_base_model import test_basemodel
 from models.city import City
+from unittest import skipIf
+from os import getenv
 
 
+@skipIf(getenv('HBNB_TYPE_STORAGE') == 'db', "Tests for file storage")
 class test_City(test_basemodel):
     """ """
 

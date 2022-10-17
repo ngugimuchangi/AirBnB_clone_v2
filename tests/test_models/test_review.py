@@ -2,8 +2,11 @@
 """ """
 from tests.test_models.test_base_model import test_basemodel
 from models.review import Review
+from os import getenv
+from unittest import skipIf
 
 
+@skipIf(getenv('HBNB_TYPE_STORAGE') == 'db', "Tests for file storage")
 class test_review(test_basemodel):
     """ """
 
