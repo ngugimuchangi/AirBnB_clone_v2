@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Scrip that  install nginx an configure it to serve static website
 
-pattern="server_name localhost ;"
-new_location="server_name localhost;\n\n\
+pattern="server_name _;"
+new_location="server_name _;\n\n\
 	location /hbnb_static {\n\
 		# hbnb web_static\n\
                 alias /data/web_static/current;\n\
-		index index.html\n\
+		index index.html;\n\
 	}\n"
 html="<html>\n\
   <head>\n\
@@ -29,6 +29,5 @@ echo  -e "$html" | sudo tee /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test /data/web_static/current
 
 # configure nginx and restart
-sudo sed -i s@"$pattern"@"$new_location"@g /etc/nginx/sites-available/default
-# echo -e "$new_location" | sudo tee etc/nginx/sites-available/default
+sudo sed -i s@"$pattern"@"$new_location"@g temp
 service nginx restart
