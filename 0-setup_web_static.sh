@@ -37,4 +37,4 @@ ln -sf /data/web_static/releases/test /data/web_static/current
 # configure nginx and restart
 # sudo sed -i s@"$pattern"@"$new_location"@g /etc/nginx/sites-available/default
 echo -e "$new_location" | sudo tee etc/nginx/sites-available/default
-servie nginx restart
+service nginx restart
