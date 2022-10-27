@@ -27,7 +27,7 @@ def do_pack():
 
     # create compressed tar file in the versions directory
     with lcd('versions'):
-        execute = local(f'tar -zcvf {file_name}.tzg ../web_static')
+        execute = local(f'tar -zcvf {file_name}.tgz ../web_static')
 
     # check cmd success and return path
     if execute.succeeded:
