@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Scrip that  install nginx an configure it to serve static website
+
 pattern="server_name localhost;"
 new_location="server_name localhost;\n\n\
 	location /hbnb_static {\n\
@@ -8,7 +9,6 @@ new_location="server_name localhost;\n\n\
 	}\n\n"
 # install nginx if not install
 sudo apt -y update
-sudo apt -y upgrade
 sudo apt -y install nginx
 
 # create web static directories and files
