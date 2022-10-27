@@ -3,8 +3,8 @@
 
 # pattern="server_name ;"
 new_location="server {\n\
-	listen *:80i default_server;\n\
-	listen *[::]:80 ipv6only=on default_server;\n\
+	listen 80 default_server;\n\
+	listen [::]:80 default_server;\n\
 	root /var/www/html;\n\
 	index index.html index.htm;\n\n\
 	server_name localhost;\n\n\
