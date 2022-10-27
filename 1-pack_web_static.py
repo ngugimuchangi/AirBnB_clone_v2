@@ -22,7 +22,7 @@ def do_pack():
     file_name = f"web_static{year}{month}{day}{hour}{minute}{second}"
 
     # create directory if it doesn't exist
-    if not path.exists('versions'):
+    if not path.isdir('versions'):
         local('mkdir versions')
 
     # create compressed tar file in the versions directory
