@@ -1,5 +1,5 @@
 #!/urs/bin/python3
-""" Deployment module using fabric
+"""Deployment module using fabric
 """
 from fabric.api import cd, env, run, put
 from os import path
