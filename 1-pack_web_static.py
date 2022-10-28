@@ -1,18 +1,12 @@
 #!/usr/bin/python3
-"""
-Fabfile for webstatic
-Functions: do_pack
-"""
+'''Fabfile script for generating compressed tar file'''
 from datetime import datetime
 from fabric.api import local, lcd, settings, task
 
 
 @task
 def do_pack():
-    """ Creates compressed archive file of web_static folder
-        Args: none
-        Return: name of compressed tar file created
-    """
+    '''creates compressed archive file of web_static folder'''
 
     # essential variables for file name
     file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
