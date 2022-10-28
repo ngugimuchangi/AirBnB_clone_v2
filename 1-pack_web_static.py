@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-'''Fabfile script for generating compressed tar file'''
+""" Fabfile script for generating compressed tar file
+"""
 
 
 from datetime import datetime
@@ -8,7 +9,8 @@ from fabric.api import local, lcd, settings, task
 
 @task
 def do_pack():
-    '''creates compressed archive file of web_static folder'''
+    """ creates compressed archive file of web_static folder
+    """
 
     # essential variables for file name
     file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
