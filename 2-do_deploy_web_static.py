@@ -1,4 +1,4 @@
-#!/urs/bin/python3
+#!/usr/bin/python3
 """Deployment module using fabric
 """
 from fabric.api import cd, env, run, put, with_settings
