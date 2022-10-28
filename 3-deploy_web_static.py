@@ -1,4 +1,4 @@
-#!/usr/bin
+#!/usr/bin/python3
 """ Full deployment module
 """
 from fabric.api import task
