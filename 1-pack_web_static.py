@@ -7,8 +7,7 @@ from fabric.api import local, lcd, settings, task
 
 @task
 def do_pack():
-    """ Creates compressed archive file
-        of web_static folder
+    """ Creates compressed archive file of web_static folder
     """
 
     # essential variables for file name
