@@ -12,7 +12,7 @@ def do_pack():
     """
 
     # essential variables for file name
-    file_name = f"web_static_{datetime.now().strftime('%Y%m%d%%H%M%S')}"
+    file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
     # create directory if it doesn't exist
     with settings(warn_only=True):
