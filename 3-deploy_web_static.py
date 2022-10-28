@@ -1,18 +1,89 @@
 #!/usr/bin/python3
 """ Full deployment module
 """
-from fabric.api import task
+from datetime import datetime
+from fabric.api import cd, env, lcd, local, put, run, task, with_settings
+from fabric.api import serial
+from os import path
+
+env.hosts = ["44.200.168.223", "18.204.14.103"]
 
 
+@with_settings(warn_only=True)
+def do_pack():
+    '''Creates compressed archive file of web_static folder'''
+
+    # essential variables for file name
+    file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
+
+    # create directory if it doesn't exist
+    if local('test -d versions').failed:
+        local('mkdir versions')
+
+    # create compressed tar file in the versions directory
+    with lcd('versions'):
+        execute = local(f'tar -zcvf {file_name} ../web_static')
+
+    # check cmd success and return path
+    if execute.succeeded:
+        return f"versions/{file_name}"
+
+
+@with_settings(warn_only=True)
+def do_deploy(archive_path):
+    """ Function to distribute archive files to webservers
+    """
+
+    # essential file names
+    file_name = archive_path.split('/')[-1]
+    extract_folder = file_name.replace('.tgz', "")
+    destination = '/data/web_static/releases/'
+    full_path = f'{destination}/{extract_folder}'
+    link = "/data/web_static/current"
+
+    # check if archive file exists
+    if not path.isfile(archive_path):
+        return False
+
+    # transfer file to remote
+    if put(archive_path, "/tmp/").failed:
+        return False
+
+    # change directory and extract file
+    with cd(destination):
+        if run(f'mkdir {extract_folder}').failed:
+            return False
+    with cd(full_path):
+        if run(f'tar -xzvf /tmp/{file_name}').failed:
+            return False
+        # mv files and delete folder
+        if run(f'mv web_static/* .').failed:
+            return False
+        if run(f'rm -rf web_static').failed:
+            return False
+
+    # rm  archive file
+    if run(f'rm -rf /tmp/{file_name}').failed:
+        return False
+
+    # create new symbolic link
+    if run(f'ln -sfn {full_path} {link}').failed:
+        return False
+
+    return True
+
+
+@serial
 def deploy():
     """ Function to pack and deploy
     """
     # import required functions
-    do_pack = __import__('1-pack_web_static').do_pack
-    do_depoly = __import__('2-do_deploy_web_static').do_deploy
+    # do_pack = __import__('1-pack_web_static').do_pack
+    # do_depoly = __import__('2-do_deploy_web_static').do_deploy
 
     tar = do_pack()
     if tar is None:
         return False
+
     status = do_deploy(tar)
     return status
