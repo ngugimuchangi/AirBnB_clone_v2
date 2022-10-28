@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scrip that  install nginx an configure it to serve static website
+# Script that  install nginx an configure it to serve static website
 
 pattern="server_name _;"
 new_location="server_name _;\n\n\
