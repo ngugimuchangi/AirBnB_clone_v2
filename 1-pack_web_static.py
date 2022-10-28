@@ -2,28 +2,22 @@
 """ Fabfile module for webstatic
 """
 from datetime import datetime
-from fabric.api import local, lcd
-from os import path
+from fabric.api import local, lcd, settings, task
 
 
+@task
 def do_pack():
     """ Creates compressed archive file
         of web_static folder
     """
 
     # essential variables for file name
-    date = datetime.now()
-    year = date.year
-    month = date.month
-    day = date.day
-    hour = date.hour
-    minute = date.minute
-    second = date.second
-    file_name = f"web_static{year}{month}{day}{hour}{minute}{second}"
+    file_name = f"web_static_{datetime.now().strftime('%Y%m%d%%H%M%S')}"
 
     # create directory if it doesn't exist
-    if not path.isdir('versions'):
-        local('mkdir versions')
+    with settings(warn_only=True):
+        if local('test -d versions').failed:
+            local('mkdir versions')
 
     # create compressed tar file in the versions directory
     with lcd('versions'):
