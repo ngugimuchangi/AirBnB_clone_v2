@@ -1,14 +1,12 @@
 #!/usr/bin/python3
-""" Fabfile module for webstatic
-"""
+'''Fabfile module for webstatic'''
 from datetime import datetime
 from fabric.api import local, lcd, settings, task
 
 
 @task
 def do_pack():
-    """ Creates compressed archive file of web_static folder
-    """
+    '''Creates compressed archive file of web_static folder'''
 
     # essential variables for file name
     file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}"
