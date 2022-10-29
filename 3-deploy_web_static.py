@@ -28,7 +28,6 @@ def do_pack():
     if execute.succeeded:
         return f"versions/{file_name}"
 
-
 @with_settings(warn_only=True)
 def do_deploy(archive_path):
     """ Function to distribute archive files to webservers
@@ -73,7 +72,6 @@ def do_deploy(archive_path):
     return True
 
 
-@serial
 @task
 def deploy():
     """ Function to pack and deploy
