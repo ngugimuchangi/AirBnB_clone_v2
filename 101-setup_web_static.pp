@@ -1,5 +1,5 @@
 # Puppet script to install nginx and change configuration files
-$directories = '/data/wed_static/releases/test /data/web_static/shared'
+$directories = '/data/web_static/releases/test /data/web_static/shared'
 $location_block = '\\tlocation /hbnb_static {\\n\\t\\talias /data/web_static/current;\\n\\t}'
 
 # install nginx x
