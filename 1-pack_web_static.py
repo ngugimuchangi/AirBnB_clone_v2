@@ -3,10 +3,9 @@
 
 
 from datetime import datetime
-from fabric.api import local, lcd, settings, task
+from fabric.api import local, lcd, settings
 
 
-@task
 def do_pack():
     """ creates compressed archive file of web_static folder """
 
