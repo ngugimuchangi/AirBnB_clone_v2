@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Script that  install nginx an configure it to serve static website
 
-pattern="server_name _;"
-new_location="server_name _;\n\n\
+pattern="server_name localhost;"
+new_location="server_name localhost;\n\n\
 	location /hbnb_static {\n\
 		# hbnb web_static\n\
                 alias /data/web_static/current;\n\
