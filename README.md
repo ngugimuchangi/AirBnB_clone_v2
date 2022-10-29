@@ -142,16 +142,17 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 <br>
 
 <center><h2>Version_2 Details</h2> </center>
+
 <center><h3>Web Static</h3> </center>
 
-Description: Static website for the AirBnB project
-
-Languages: `HTML`, `CSS`
-
-Files: [web_static](web_static)
+    * Description: Static website for the AirBnB project
+    * Languages: `HTML`, `CSS`
+    * Files: [web_static](web_static)
 
 <center><h3>Configuration management and deployement</h3> </center>
-Description: Automation of server configuration and code deployment
+    
+    * Description: Automation of server configuration and code deployment
+
 | Task | File | Description |
 | ---- | ---- | ----------- |
 |0: Server configuration | [0-setup_web_static.sh](0-setup_web_static.sh) | Installing and configuring nginx server to serve `hbnb_static` url |
