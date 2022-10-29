@@ -147,13 +147,13 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 
 Description: Static website for the AirBnB project
 
-Files: [web_static](web_static)
+File: [web_static](web_static)
 
 <center><h3>Configuration management and deployement</h3> </center>
     
 Description: Automation of server configuration and code deployment using:
 
-* `Fabric`: python library for executing shell commands remotely over `SHH`
+* `Fabric`: python library for executing shell commands remotely over `SSH`
 * `Puppet`: configuration management and deployment tool
 
 | Task | File | Description |
