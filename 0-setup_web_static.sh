@@ -24,9 +24,9 @@ sudo apt -y install nginx
 # create web static directories and files
 sudo mkdir -p /data/web_static/releases/test
 sudo mkdir -p /data/web_static/shared
-sudo chown -R  ubuntu:ubuntu /data
 echo  -e "$html" | sudo tee /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test /data/web_static/current
+sudo chown -R  ubuntu:ubuntu /data/
 
 # configure nginx and restart
 sudo sed -i s@"$pattern"@"$new_location"@g temp
