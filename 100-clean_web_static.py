@@ -9,7 +9,7 @@ env.hosts = ["44.200.168.223", "18.204.14.103"]
 
 @runs_once
 def do_local(number):
-    """Local operations"""
+    """ local operations """
 
     with lcd('versions'):
         # check for number of files
@@ -32,7 +32,7 @@ def do_local(number):
 
 
 def do_remote(number):
-    """Remote operations"""
+    """ remote operations """
 
     with cd('/data/web_static/releases'):
         # check for number of files
@@ -56,7 +56,7 @@ def do_remote(number):
 @task
 @with_settings(warn_only=True)
 def do_clean(number=0):
-    """Function to remove outdate tgz files"""
+    """ fabric task to remove outdate files """
     number = int(number)
     do_local(number)
     do_remote(number)

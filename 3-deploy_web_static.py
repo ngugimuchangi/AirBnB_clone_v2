@@ -12,7 +12,8 @@ env.hosts = ["44.200.168.223", "18.204.14.103"]
 @runs_once
 @with_settings(warn_only=True)
 def do_pack():
-    '''Creates compressed archive file of web_static folder'''
+    """ creates compressed archive file of web_static folder
+    """
 
     # essential variables for file name
     file_name = "web_static_{}.tgz".format(
@@ -33,7 +34,7 @@ def do_pack():
 
 @with_settings(warn_only=True)
 def do_deploy(archive_path):
-    """ Function to distribute archive files to webservers
+    """ deploys archive files to webservers
     """
     # essential file names
     file_name = archive_path.split('/')[-1]
@@ -76,11 +77,8 @@ def do_deploy(archive_path):
 
 @task
 def deploy():
-    """ Function to pack and deploy
+    """ main fabric task to pack and deploy
     """
-    # import required functions
-    # do_pack = __import__('1-pack_web_static').do_pack
-    # do_depoly = __import__('2-do_deploy_web_static').do_deploy
 
     tar = do_pack()
     if tar is None:

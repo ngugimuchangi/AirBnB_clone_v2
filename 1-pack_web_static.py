@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Fabfile script for generating compressed tar file"""
+""" Fabric script for generating compressed tar file
+"""
 
 from datetime import datetime
 from fabric.api import local, lcd, settings
@@ -7,8 +8,6 @@ from fabric.api import local, lcd, settings
 
 def do_pack():
     """creates compressed archive file of web_static folder
-        Args: none
-        Return: name of tgz file created
     """
     # essential variables for file name
     file_name = 'web_static_{}.tgz'.format(

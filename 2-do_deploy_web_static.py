@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Deployment module using fabric
+""" Fabric script for deployment to remote servers
 """
 from fabric.api import cd, env, run, put, with_settings
 from os import path
