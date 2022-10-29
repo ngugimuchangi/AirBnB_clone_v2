@@ -3,12 +3,13 @@
 """
 from datetime import datetime
 from fabric.api import cd, env, lcd, local, put, run, task, with_settings
-from fabric.api import serial
+from fabric.api import runs_once
 from os import path
 
 env.hosts = ["44.200.168.223", "18.204.14.103"]
 
 
+@runs_once
 @with_settings(warn_only=True)
 def do_pack():
     '''Creates compressed archive file of web_static folder'''
