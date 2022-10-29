@@ -26,7 +26,7 @@ exec {'directories':
 
 # change permissions
 -> exec {'user':
-  command  => 'sudo chown -R $USER:$USER /data',
+  command  => 'sudo chown -R ubuntu:ubuntu /data',
   provider => 'shell'
 }
 
