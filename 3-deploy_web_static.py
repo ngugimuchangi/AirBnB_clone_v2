@@ -14,7 +14,8 @@ def do_pack():
     '''Creates compressed archive file of web_static folder'''
 
     # essential variables for file name
-    file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
+    file_name = "web_static_{}.tgz".format(
+            datetime.now().strftime('%Y%m%d%H%M%S'))
 
     # create directory if it doesn't exist
     if local('test -d versions').failed:
@@ -22,22 +23,22 @@ def do_pack():
 
     # create compressed tar file in the versions directory
     with lcd('versions'):
-        execute = local(f'tar -zcvf {file_name} ../web_static')
+        execute = local('tar -zcvf {} ../web_static'.format(file_name))
 
     # check cmd success and return path
     if execute.succeeded:
-        return f"versions/{file_name}"
+        return "versions/{}".format(file_name)
+
 
 @with_settings(warn_only=True)
 def do_deploy(archive_path):
     """ Function to distribute archive files to webservers
     """
-
     # essential file names
     file_name = archive_path.split('/')[-1]
     extract_folder = file_name.replace('.tgz', "")
     destination = '/data/web_static/releases/'
-    full_path = f'{destination}/{extract_folder}'
+    full_path = '{}/{}'.format(destination, extract_folder)
     link = "/data/web_static/current"
 
     # check if archive file exists
@@ -50,23 +51,23 @@ def do_deploy(archive_path):
 
     # change directory and extract file
     with cd(destination):
-        if run(f'mkdir {extract_folder}').failed:
+        if run('mkdir {}'.fomart(extract_folder)).failed:
             return False
     with cd(full_path):
-        if run(f'tar -xzvf /tmp/{file_name}').failed:
+        if run('tar -xzvf /tmp/{}'.format(file_name)).failed:
             return False
         # mv files and delete folder
-        if run(f'mv web_static/* .').failed:
+        if run('mv web_static/* .').failed:
             return False
-        if run(f'rm -rf web_static').failed:
+        if run('rm -rf web_static').failed:
             return False
 
     # rm  archive file
-    if run(f'rm -rf /tmp/{file_name}').failed:
+    if run('rm -rf /tmp/{}'.format(file_name)).failed:
         return False
 
     # create new symbolic link
-    if run(f'ln -sfn {full_path} {link}').failed:
+    if run('ln -sfn {} {}'.format(full_path, link)).failed:
         return False
 
     return True

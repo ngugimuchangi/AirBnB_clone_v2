@@ -15,7 +15,7 @@ def do_deploy(archive_path):
     file_name = archive_path.split('/')[-1]
     extract_folder = file_name.replace('.tgz', "")
     destination = '/data/web_static/releases/'
-    full_path = f'{destination}/{extract_folder}'
+    full_path = '{}/{}'.format(destination, extract_folder)
     link = "/data/web_static/current"
 
     # check if archive file exists
@@ -28,23 +28,23 @@ def do_deploy(archive_path):
 
     # change directory and extract file
     with cd(destination):
-        if run(f'mkdir {extract_folder}').failed:
+        if run('mkdir {}'.fomart(extract_folder)).failed:
             return False
     with cd(full_path):
-        if run(f'tar -xzvf /tmp/{file_name}').failed:
+        if run('tar -xzvf /tmp/{}'.format(file_name)).failed:
             return False
         # mv files and delete folder
-        if run(f'mv web_static/* .').failed:
+        if run('mv web_static/* .').failed:
             return False
-        if run(f'rm -rf web_static').failed:
+        if run('rm -rf web_static').failed:
             return False
 
     # rm  archive file
-    if run(f'rm -rf /tmp/{file_name}').failed:
+    if run('rm -rf /tmp/{}'.format(file_name)).failed:
         return False
 
     # create new symbolic link
-    if run(f'ln -sfn {full_path} {link}').failed:
+    if run('ln -sfn {} {}'.format(full_path, link)).failed:
         return False
 
     return True
