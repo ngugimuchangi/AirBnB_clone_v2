@@ -151,8 +151,16 @@ Files: [web_static](web_static)
 
 <center><h3>Configuration management and deployement</h3> </center>
     
-Description: Automation of server configuration and code deployment
+Description: Automation of server configuration and code deployment using:
+
+* `Fabric`: python library for executing shell commands remotely over `SHH`
+* `Puppet`: configuration management and deployment tool
 
 | Task | File | Description |
 | ---- | ---- | ----------- |
-|0: Server configuration | [0-setup_web_static.sh](0-setup_web_static.sh) | Installing and configuring nginx server to serve `hbnb_static` url |
+| 0: Server configuration | [0-setup_web_static.sh](0-setup_web_static.sh) | Bash script for installing and configuring nginx server to serve `hbnb_static` url |
+| 1: Packing code | [1-pack_web_static.py](1-pack_web_static.py) | Preparing code for deployment by converting it to `Tape Archive File` and compressing into `.tgz` file |
+| 2: Deploy code | [2-do_deploy_web_static.py](2-do_deploy_web_static.py) | Deploy code to remote servers |
+| 3: Pack and deploy | [3-deploy_web_static.py](3-deploy_web_static.py) | Pack and deploy code to remote servers |
+| 4: Clean up | [100-clean_web_static.py](100-clean_web_static.py) | Remove a specified number of files in local and remote directories |
+| 5. Configure with puppet | [101-setup_web_static.pp](101-setup_web_static.pp) | Puppet script for installing and configuring ngix server to server `hbnb_static` url |
