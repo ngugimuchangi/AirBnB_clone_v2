@@ -11,7 +11,8 @@ def do_pack():
         Return: name of tgz file created
     """
     # essential variables for file name
-    file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
+    file_name = 'web_static_{}.tgz'.format(
+            datetime.now().strftime('%Y%m%d%H%M%S'))
 
     # create directory if it doesn't exist
     with settings(warn_only=True):
@@ -20,7 +21,7 @@ def do_pack():
 
     # create compressed tar file in the versions directory
     with lcd('versions'):
-        execute = local(f'tar -zcvf {file_name} ../web_static')
+        execute = local('tar -zcvf {} ../web_static'.format(file_name))
 
     if execute.succeeded:
-        return f"versions/{file_name}"
+        return 'versions/{}'.format(file_name)
