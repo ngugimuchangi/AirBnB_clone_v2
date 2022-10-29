@@ -28,7 +28,7 @@ def do_deploy(archive_path):
 
     # change directory and extract file
     with cd(destination):
-        if run('mkdir {}'.fomart(extract_folder)).failed:
+        if run('mkdir {}'.format(extract_folder)).failed:
             return False
     with cd(full_path):
         if run('tar -xzvf /tmp/{}'.format(file_name)).failed:
