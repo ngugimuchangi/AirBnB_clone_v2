@@ -1,6 +1,6 @@
 # Puppet script to install nginx and change configuration files
 $directories = '/data/web_static/releases/test /data/web_static/shared'
-$location_block = '\\tlocation /hbnb_static {\\n\\t\\talias /data/web_static/current;\\n\\t}'
+$location_block = '\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t\tindex index.html;\n\t}'
 
 # install nginx x
 exec { 'nginx':
@@ -20,7 +20,7 @@ exec {'directories':
 }
 
 -> exec {'link':
-  command  => 'sudo ln -s /data/web_static/releases/test /data/web_static/current',
+  command  => 'sudo ln -sf /data/web_static/releases/test /data/web_static/current',
   provider => 'shell'
 }
 
@@ -32,12 +32,12 @@ exec {'directories':
 
 # configure nginx
 -> exec {'config':
-  command  =>  "sudo sed -i 38i\\${location_block} /data/web_static/releases/test/index.html",
+  command  =>  "sudo sed -i '38i\\${location_block}' /data/web_static/releases/test/index.html",
   provider => 'shell'
 }
 
 # restart nginx
 -> exec {'restart':
-  command  => 'sudo restart nginx',
+  command  => 'sudo service nginx restart',
   provider => 'shell'
 }
