@@ -26,13 +26,13 @@ exec {'directories':
 
 # change permissions
 -> exec {'user':
-  command  => 'sudo chown -R ubuntu:ubuntu /data',
+  command  => 'sudo chown -R $USER:$USER /data',
   provider => 'shell'
 }
 
 # configure nginx
 -> exec {'config':
-  command  =>  "sudo sed -i '38i\\${location_block}' /data/web_static/releases/test/index.html",
+  command  =>  "sudo sed -i '38i\\${location_block}' /etc/nginx/sites-available/default",
   provider => 'shell'
 }
 
