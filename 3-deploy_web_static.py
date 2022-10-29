@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Full deployment module
+""" Fabric script for full deployment
 """
 from datetime import datetime
 from fabric.api import cd, env, lcd, local, put, run, task, with_settings
@@ -74,6 +74,7 @@ def do_deploy(archive_path):
 
 
 @serial
+@task
 def deploy():
     """ Function to pack and deploy
     """
