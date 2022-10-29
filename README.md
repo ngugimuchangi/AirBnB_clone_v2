@@ -141,7 +141,7 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 ```
 <br>
 
-<center><h2>Version_2 Details</h2> </center>
+<center><h2>Version 2 Details</h2> </center>
 
 <center><h3>Web Static</h3> </center>
 
