@@ -6,10 +6,12 @@ from fabric.api import local, lcd, settings
 
 
 def do_pack():
-    '''creates compressed archive file of web_static folder
-        Args: none
-        Return: name of tgz file created
-    '''
+    """generates a .tgz archive from the contents of the web_static folder
+    Arguments:
+        None
+    Returns:
+        (str) file path
+    """
     # essential variables for file name
     file_name = f"web_static_{datetime.now().strftime('%Y%m%d%H%M%S')}.tgz"
 
