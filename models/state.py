@@ -23,7 +23,6 @@ class State(BaseModel, Base):
             cities = []
             all_cities = storage.all(City)
             for city in all_cities.values():
-                if all(['state_id' in city.__dict__.keys(),
-                        city.state_id == self.id]):
+                if city.__dict__.get('state_id') == self.id:
                     cities.append(city)
             return cities
