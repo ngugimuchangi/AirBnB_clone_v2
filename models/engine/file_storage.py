@@ -67,3 +67,7 @@ class FileStorage:
             if key in FileStorage.__objects.keys():
                 del FileStorage.__objects[key]
                 self.save()
+
+    def close(self):
+        """Temporary documentation"""
+        self.reload()
