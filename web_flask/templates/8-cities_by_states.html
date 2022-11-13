@@ -5,20 +5,16 @@
   </HEAD>
   <BODY>
 	<H1>States</H1>
-	{%- if states %}
 	<UL>
 	  {% for state in states.values() | sort(attribute="name") %}
 	  <LI>{{ state.id }}: <B>{{ state.name }}</B>
-	  	{% if state.cities %}
 	  	<UL>
 		  {% for city in state.cities | sort(attribute="name") %}
 		  <LI>{{ city.id }}: </B>{{ city.name }}</B></LI>
 		  {% endfor %}
 		</UL>
-		{% endif %}
 	  </LI>
 	  {% endfor %}
 	</UL>
-	{%- endif %}
   </BODY>
 </HTML>
