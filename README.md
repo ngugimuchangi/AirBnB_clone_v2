@@ -166,5 +166,7 @@ Description: Automation of server configuration and code deployment using:
 | 5. Configure with puppet | [101-setup_web_static.pp](101-setup_web_static.pp) | Puppet script for installing and configuring ngix server to server `hbnb_static` url |
 
 <center><h3>Web Flask</h3></center>
+
 Description: Application server using `Flask` framework
+
 :page_with_curl: [web_flask](web_flask)
