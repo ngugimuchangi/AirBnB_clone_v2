@@ -147,7 +147,7 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 
 Description: Static website for the AirBnB project
 
-:page_curl: [web_static](web_static)
+:page_with_curl: [web_static](web_static)
 
 <center><h3>Configuration management and deployement</h3> </center>
     
@@ -167,4 +167,4 @@ Description: Automation of server configuration and code deployment using:
 
 <center><h3>Web Flask</h3></center>
 Description: Application server using `Flask` framework
-:page_curl: [web_flask](web_flask)
+:page_with_curl: [web_flask](web_flask)
