@@ -147,7 +147,7 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 
 Description: Static website for the AirBnB project
 
-:page_with_curl: [web_static](web_static)
+&emsp; :page_with_curl: [web_static](web_static)
 
 <center><h3>Configuration management and deployement</h3> </center>
     
@@ -169,4 +169,4 @@ Description: Automation of server configuration and code deployment using:
 
 Description: Application server using `Flask` framework
 
-:page_with_curl: [web_flask](web_flask)
+&emsp; :page_with_curl: [web_flask](web_flask)
