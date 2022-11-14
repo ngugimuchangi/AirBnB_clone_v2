@@ -81,8 +81,8 @@ Building application server with `Flask` framework
 			* `H1` tag: **“States”**
 			* `UL` tag: with the list of all `State` objects present in `DBStorage` sorted by name (A->Z)
 				* `LI` tag: description of one `State: <state.id>: <B><state.name></B>`
-	* [web_flask/7-states_list.py](web_flask/7-states_list.py)
-	* [web_flask/templates/7-states_list.html](web_flask/templates/7-states_list.html)
+	* [7-states_list.py](7-states_list.py)
+	* [templates/7-states_list.html](templates/7-states_list.html)
 9. Script that starts a Flask web application:
 	* Listens on `0.0.0.0`, port `5000`
 	* Removes SQLAlchemy session after each request
@@ -92,8 +92,8 @@ Building application server with `Flask` framework
 			* `UL` tag: with the list of all `State` objects present in `DBStorage` sorted by name (A->Z)
 				* `LI` tag: description of one `State: <state.id>: <B><state.name></B>` + `UL` tag: with the list of `City` objects linked to the `State` sorted by name (A->Z)
 					* `LI` tag: description of one `City: <city.id>: <B><city.name></B>`
-	* [web_flask/8-cities_by_states.py](web_flask/8-cities_by_states.py)
-	* [web_flask/templates/8-cities_by_states.html](web_flask/templates/8-cities_by_states.html) 
+	* [8-cities_by_states.py](8-cities_by_states.py)
+	* [templates/8-cities_by_states.html](templates/8-cities_by_states.html) 
 10. Script that starts a Flask web application:
 	* Listens on `0.0.0.0`, port `5000`
 	* Fetches data from storage engine `FileStorage` or `DBStorage`
@@ -111,8 +111,8 @@ Building application server with `Flask` framework
 					* `LI` tag: description of one `City: <city.id>: <B><city.name></B>`
 			* `Otherwise`:
 				* H1 tag: “Not found!”
-	* [web_flask/9-states.py](web_flask/9-states.py)
-	* [web_flask/templates/9-states.html](web_flask/templates/9-states.html)
+	* [9-states.py](9-states.py)
+	* [templates/9-states.html](templates/9-states.html)
 11. Script that starts a Flask web application:
 	* Listens on `0.0.0.0`, port `5000`
 	* Fetches data from storage engine `FileStorage` or `DBStorage`
@@ -120,9 +120,9 @@ Building application server with `Flask` framework
 	* Routes:
 		* `/hbnb_filters`: display a HTML page like [6-index.html`](../web_static/6-index.html)
 			* `State`, `City` and `Amenity` objects must be loaded from `DBStorage` and sorted by name (A->Z) 
-	* [web_flask/10-hbnb_filters.py](web_flask/10-hbnb_filters.py)
-	* [web_flask/templates/10-hbnb_filters.html](web_flask/templates/10-hbnb_filters.html)
-	* [web_flask/static/](web_flask/static/)
+	* [10-hbnb_filters.py](10-hbnb_filters.py)
+	* [templates/10-hbnb_filters.html](templates/10-hbnb_filters.html)
+	* [static/](static/)
 12. Script that starts a Flask web application:
 	* Listens on `0.0.0.0`, port `5000`
 	* Fetches data from storage engine `FileStorage` or `DBStorage`
@@ -130,6 +130,6 @@ Building application server with `Flask` framework
 	* Routes:
 		* `/hbnb`:  display a HTML page like [8-index.html](../web_static/8-index.html)
 			* `State`, `City` and `Amenity` objects must be loaded from `DBStorage` and sorted by name (A->Z)
-	* [web_flask/100-hbnb.py](web_flask/100-hbnb.py)
-	* [web_flask/templates/100-hbnb.html](web_flask/templates/100-hbnb.html)
-	* [web_flask/static/](web_flask/static/)
+	* [100-hbnb.py](100-hbnb.py)
+	* [templates/100-hbnb.html](templates/100-hbnb.html)
+	* [static/](static/)
